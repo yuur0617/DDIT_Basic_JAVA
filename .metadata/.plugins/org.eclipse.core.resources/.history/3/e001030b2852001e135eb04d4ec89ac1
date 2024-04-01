@@ -1,0 +1,43 @@
+package service;
+
+import java.util.List;
+import java.util.Map;
+
+import dao.ReservationDAO;
+import util.ScanUtil;
+import util.View;
+
+public class ReservationService {
+	//싱글톤
+	private static ReservationService instance = null;
+	private ReservationService() {}
+	public static ReservationService getInstance() {
+		if(instance == null) instance = new ReservationService();
+		return instance;
+	}
+	
+	ReservationDAO dao = ReservationDAO.getInstance();
+	
+	public int list() {
+		System.out.println("---------------------------------------");
+		System.out.println("1. 101호     2. 102호    3. 103호    4. 201호    5. 202호");
+		System.out.print("번호 선택 >> ");
+		switch(ScanUtil.nextInt()) {
+		case 1: return View.BOARD_DETAIL;
+		case 2: return View.BOARD_INSERT;
+		case 3: return View.BOARD_UPDATE;
+		case 4: return View.BOARD_DELETE;
+		default: return View.HOME;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+

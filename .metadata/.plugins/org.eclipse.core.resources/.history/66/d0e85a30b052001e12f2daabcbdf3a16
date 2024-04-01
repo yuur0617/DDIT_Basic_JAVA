@@ -1,0 +1,57 @@
+package service;
+
+import java.lang.reflect.Array;
+import java.util.List;
+import java.util.Map;
+
+import dao.ReservationDAO;
+import util.ScanUtil;
+import util.View;
+
+public class ReservationService {
+	//싱글톤
+	private static ReservationService instance = null;
+	private ReservationService() {}
+	public static ReservationService getInstance() {
+		if(instance == null) instance = new ReservationService();
+		return instance;
+	}
+	
+	ReservationDAO dao = ReservationDAO.getInstance();
+	
+	public int list() {
+		System.out.println("---------------------------------------");
+		System.out.println("1. 101호   2.102호  4.201호");
+		System.out.print("번호 선택 >> ");
+		int result = ScanUtil.nextInt();
+		switch(result) {
+			case 1 : 
+				int num = 101;
+				seatSno1();
+			case 2: 
+			case 4: 
+				seatSno2();
+		default: return View.HOME;
+		}
+	}
+	
+	public void seatSno1() {	//자리가 9개인 seat 좌석번호를 받아서 3*3으로 표시
+//		1번 선택 시 DB에서 101호의 좌석번호, 예약 여부(T,F)를 받아와서
+//		3*3 으로 된 좌석 배치도에 T일 경우 □, F일 경우 ■ 입력
+
+	}
+	
+	public void seatSno2() {	//자리가 20개인 seat
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+

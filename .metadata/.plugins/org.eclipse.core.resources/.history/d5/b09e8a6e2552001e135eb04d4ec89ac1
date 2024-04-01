@@ -1,0 +1,69 @@
+package controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import service.BoardService;
+import service.FreeBoardService;
+import service.LoginService;
+import service.MemberService;
+import service.TestBoardService;
+import util.ScanUtil;
+import util.View;
+
+public class Controller {
+	// 세션
+	static public Map<String, Object> sessionStorage = new HashMap<>();
+	
+	//////
+	
+	
+	public static void main(String[] args) {
+		new Controller().start();
+	}
+	
+	private void start() {
+		sessionStorage.put("login", false);	// false: 로그인 안됨
+		sessionStorage.put("loginInfo", null);
+		int view = View.HOME;
+		while(true) {
+			switch (view) {
+			// 팀장
+			case View.HOME: 
+				view =reservationTest(); 
+				break;
+			
+			// 예약담당
+			case View.RESERVATION: 
+				view = loginService.login(); 
+				break;
+			case View.MEMBER_SIGNUP: 
+				view = memberService.signUp(); 
+				break;
+			case View.MEMBER_UPDATE: 
+				view = memberService.infoUpdate(); 
+				break;
+			}
+		}
+	}
+
+	private int reservationTest() {
+		System.out.println(sessionStorage.get("login"));
+		System.out.println(sessionStorage.get("loginInfo"));
+		
+		System.out.println("==== 대덕인재 개발원 ====");
+		System.out.println("   1.입실		2.퇴실	");
+		System.out.println("=========================");
+		System.out.print("번호 입력 >> ");
+		switch (ScanUtil.nextInt()) {
+		case 1: 
+			return View.MEMBER_LOGIN;
+		case 2: return View.MEMBER_SIGNUP;
+		case 3: return View.MEMBER_UPDATE;
+		case 4: return View.FREE_LIST;
+		case 5: return View.TEST_LIST;
+		default: return View.HOME;
+		}
+	}
+
+}
